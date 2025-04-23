@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Apresentação Power BI</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    iframe {
+      width: 100vw;
+      height: 100vh;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <iframe id="pbiFrame"></iframe>
+
+  <script>
+    const reportId = "26027287-2b05-41b5-9a7d-493fe00c80bf";
+    const tenantId = "7e4058f3-1c1f-4c3a-8151-03d3a2c3c30c";
+
+    const pageIds = ["ReportSection", "ReportSection1"]; // Altere se os nomes forem diferentes
+    let currentPage = 0;
+
+    function updatePage() {
+      const section = pageIds[currentPage];
+      const url = `https://app.powerbi.com/reportEmbed?reportId=${reportId}&autoAuth=true&ctid=${tenantId}&pageName=${section}`;
+      document.getElementById("pbiFrame").src = url;
+
+      currentPage = (currentPage + 1) % pageIds.length;
+    }
+
+    updatePage(); // Carrega a primeira página
+    setInterval(updatePage, 5000); // Troca a cada 5 segundos
+  </script>
+</body>
+</html>
