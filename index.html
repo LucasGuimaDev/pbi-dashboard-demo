@@ -6,51 +6,56 @@
   <style>
     body {
       margin: 0;
-      overflow: hidden;
+      padding: 0;
     }
 
-    #container {
-      height: 3000px; /* Altura grande para permitir rolagem */
-      padding: 0;
-      margin: 0;
+    .iframe-container {
+      height: 6000px; /* altura grande para ter rolagem */
     }
 
     iframe {
       width: 100%;
-      height: 3000px;
+      height: 600px;
       border: none;
+      display: block;
+      margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
-  <div id="container">
+
+  <div class="iframe-container">
+    <!-- Repita o iframe para aumentar o conteúdo da página -->
     <iframe
       title="BI Televisão"
       src="https://app.powerbi.com/reportEmbed?reportId=26027287-2b05-41b5-9a7d-493fe00c80bf&autoAuth=true&ctid=7e4058f3-1c1f-4c3a-8151-03d3a2c3c30c"
-      allowFullScreen="true">
+      allowfullscreen="true">
     </iframe>
-    <!-- Copia o iframe várias vezes para encher a página -->
+
+    <iframe src="about:blank"></iframe>
     <iframe src="about:blank"></iframe>
     <iframe src="about:blank"></iframe>
     <iframe src="about:blank"></iframe>
   </div>
 
   <script>
-    let scrollSpeed = 1; // pixels por passo
-    let interval = 20; // intervalo entre passos em milissegundos
+    let scrollSpeed = 1; // pixels
+    let scrollDelay = 20; // ms
 
     function autoScroll() {
+      // Scroll pra baixo
       window.scrollBy(0, scrollSpeed);
 
-      if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
-        // Se chegou ao fim da página, volta ao topo
+      // Se chegou no fim da página, volta pro topo
+      if ((window.innerHeight + window.pageYOffset) >= document.body.scrollHeight) {
         window.scrollTo(0, 0);
       }
     }
 
     window.onload = function () {
-      setInterval(autoScroll, interval);
-    }
+      setInterval(autoScroll, scrollDelay);
+    };
   </script>
+
 </body>
 </html>
