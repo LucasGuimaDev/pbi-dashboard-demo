@@ -1,52 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Apresentação Power BI</title>
-  <script>
-    // IDs fixos
-    const reportId = "26027287-2b05-41b5-9a7d-493fe00c80bf";
-    const tenantId = "7e4058f3-1c1f-4c3a-8151-03d3a2c3c30c";
+    <meta charset="UTF-8">
+    <title>Power BI Televisão</title>
+    <script type="text/javascript">
+        var curpos1 = 0;
+        var curpos2 = 0;
+        var alt = 0;
 
-    // Páginas personalizadas
-    const pageNames = ["Televisão"];
-    
-    // Salvar o índice atual da página em localStorage (para manter entre reloads)
-    let currentPage = parseInt(localStorage.getItem("currentPage") || "0");
+        function scrollwindow() {
+            var temp = (document.all) ? document.body.scrollTop : window.pageYOffset;
 
-    // Atualiza a página (reload total)
-    function redirectToNextPage() {
-      const nextPage = pageNames[currentPage];
-      const nextUrl = `${window.location.origin}${window.location.pathname}?page=${nextPage}`;
+            if (alt === 0) {
+                alt = 1;
+                curpos1 = temp;
+            } else {
+                alt = 0;
+                curpos2 = temp;
+            }
 
-      // Atualiza o índice para próxima execução
-      currentPage = (currentPage + 1) % pageNames.length;
-      localStorage.setItem("currentPage", currentPage);
+            if (curpos1 !== curpos2) {
+                var currentpos = temp + 1;
+                window.scrollTo(0, currentpos);
+            } else {
+                window.scrollTo(0, 0); // volta ao topo quando chega no fim
+            }
+        }
 
-      window.location.href = nextUrl;
-    }
+        function startit() {
+            setInterval(scrollwindow, 50); // ajustado para uma rolagem mais suave
+        }
 
-    // Aguarda 5 segundos e recarrega para a próxima página
-    setTimeout(redirectToNextPage, 5000);
-  </script>
+        window.onload = startit;
+    </script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        #contain {
+            height: 2000px; /* altura grande para permitir rolagem */
+        }
+    </style>
 </head>
-<body style="margin:0;padding:0;overflow:hidden">
-  <iframe
-    id="pbiFrame"
-    width="100%"
-    height="100%"
-    frameborder="0"
-    allowFullScreen="true"
-    src=""
-  ></iframe>
-
-  <script>
-    // Pega o parâmetro ?page= da URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const currentPageName = urlParams.get("page") || "Televisão";
-
-    const iframeUrl = `https://app.powerbi.com/reportEmbed?reportId=${reportId}&autoAuth=true&ctid=${tenantId}&pageName=${currentPageName}`;
-    document.getElementById("pbiFrame").src = iframeUrl;
-  </script>
+<body>
+    <div id="contain">
+        <iframe title="BI Televisão"
+            width="100%"
+            height="1080"
+            src="https://app.powerbi.com/reportEmbed?reportId=26027287-2b05-41b5-9a7d-493fe00c80bf&autoAuth=true&ctid=7e4058f3-1c1f-4c3a-8151-03d3a2c3c30c"
+            frameborder="0"
+            allowFullScreen="true">
+        </iframe>
+    </div>
 </body>
 </html>
