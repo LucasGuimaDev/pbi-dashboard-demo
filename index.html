@@ -19,8 +19,8 @@
     }
 
     iframe {
-      width: 200vw;  /* largura maior para permitir scroll horizontal */
-      height: 200vh; /* maior que a tela para permitir scroll interno */
+      width: 250vw; // ajuste o tamando da tela pra mostrar tudo
+      height: 300vh; /* AUMENTADO para 300vh */
       border: none;
       position: absolute;
       top: 0;
@@ -38,20 +38,20 @@
 
   <script>
     const iframe = document.getElementById('biFrame');
-    let pos = 0;  // posição inicial
+    let pos = 0;
     const scrollSpeed = 1;  // velocidade do scroll (ajustável)
 
     function scrollFrame() {
       pos += scrollSpeed;
-      iframe.style.left = `-${pos}px`; // move o iframe para cima
+      iframe.style.left = `-${pos}px`; // move o iframe para cima (não para o lado!)
 
-      // Quando chega no final (mais do que a altura total), volta ao início
-      if (pos >= iframe.clientHeight) {
-        pos = 0;  // volta para o topo
+      // Quando chega no final (altura extra), volta ao topo
+      if (pos >= (iframe.offsetHeight - window.innerHeight)) {
+        pos = 0;
       }
     }
 
-    setInterval(scrollFrame, 10);  // executa a rolagem a cada 10ms
+    setInterval(scrollFrame, 10);
   </script>
 
 </body>
