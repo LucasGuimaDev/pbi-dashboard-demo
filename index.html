@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Rolagem Vertical Power BI</title>
+  <title>Rolagem Horizontal Power BI</title>
   <style>
     body {
       margin: 0;
@@ -19,8 +19,8 @@
     }
 
     iframe {
-      width: 250vw; // ajuste o tamando da tela pra mostrar tudo
-      height: 300vh; /* AUMENTADO para 300vh */
+      width: 400vw; /* aumente só a largura */
+      height: 100vh; /* mantenha altura normal */
       border: none;
       position: absolute;
       top: 0;
@@ -39,19 +39,24 @@
   <script>
     const iframe = document.getElementById('biFrame');
     let pos = 0;
-    const scrollSpeed = 1;  // velocidade do scroll (ajustável)
+    const scrollSpeed = 2; // velocidade do scroll (ajustável)
 
     function scrollFrame() {
       pos += scrollSpeed;
-      iframe.style.left = `-${pos}px`; // move o iframe para cima (não para o lado!)
+      iframe.style.left = `-${pos}px`; // move para a esquerda (horizontal)
 
-      // Quando chega no final (altura extra), volta ao topo
-      if (pos >= (iframe.offsetHeight - window.innerHeight)) {
+      // Quando chega no final da largura, volta ao começo
+      if (pos >= (iframe.offsetWidth - window.innerWidth)) {
         pos = 0;
       }
     }
 
-    setInterval(scrollFrame, 10);
+    setInterval(scrollFrame, 10); // chama scrollFrame a cada 10ms
+
+  // >>>> AQUI REFRESH AUTOMÁTICO <<<<
+  setTimeout(() => {
+    location.reload();
+  }, 60000); // recarrega a página a cada 30 segundos
   </script>
 
 </body>
