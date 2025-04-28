@@ -39,7 +39,7 @@
   <script>
     const iframe = document.getElementById('biFrame');
     let pos = 0;
-    const scrollSpeed = 2; // velocidade do scroll (ajustável)
+    const scrollSpeed = 1; // velocidade do scroll (ajustável)
 
     function scrollFrame() {
       pos += scrollSpeed;
@@ -56,7 +56,7 @@
   // >>>> AQUI REFRESH AUTOMÁTICO <<<<
   setTimeout(() => {
     location.reload();
-  }, 60000); // recarrega a página a cada 30 segundos
+  }, 600000); // recarrega a página a cada 10 minutos
   </script>
 
 </body>
